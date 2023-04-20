@@ -47,7 +47,7 @@ class UI{
 		}		
 		$(".emotions").removeClass('d-none');
 		let txt = "";		
-		for (let emotion of game.config.emotions){
+		for (let emotion of Config.emotions){
 			txt += "<button id='" + emotion + "' class='emotion'>" 
 				+ emotion + "</button>";
 		}

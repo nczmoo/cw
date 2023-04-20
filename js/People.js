@@ -140,7 +140,7 @@ class People{
     }
 
     resetGreet(){
-        this.greet = game.config.emotions[randNum(0, game.config.emotions.length - 1)];
+        this.greet = Config.emotions[randNum(0, Config.emotions.length - 1)];
     }   
 
     talk(topic){
