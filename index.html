@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- Bootstrap CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+	<title> </title>
+	<style>
+	
+	</style>
+</head>
+<body>
+	<div class="row">
+		<div class="col text-center">
+			Day: #<span id="day"></span>
+		</div>
+		<div class="col text-center">
+			<span id="time"></span>h
+		</div>
+	</div>
+	<div id="status" class="text-center"></div>
+	<div class="text-center">House #<span id='houseNum'></span></div>
+	<div id="door" class="window text-center">
+		<div class="text-center">
+			<button id='prev' class="verb">prev house</button>
+			<button id='next' class="verb">next house</button>
+		</div>
+		<div class="text-center mt-3"><button id="knock" class="verb">knock</button></div>
+		
+	</div><div id="house" class="window ">		
+		<div>Trust: <span id='trust' ></span> [<span id='sermon'></span>]</div>
+		<div>Tolerance: <span id='tolerance' ></span></div>
+		<div>Resistance: <span id='resistance' ></span></div>
+		<div class="mt-3 emotions">
+			<span class='fw-bold'>emotions</span>
+			- them: <span id="greetedWith" class="fw-bold"></span>
+
+		</div>
+		<div id='reactBonus' class="ms-1 emotions">
+			You have <span  id='reactTimer' class=''></span> seconds remaining to react AND receive a bonus.
+		</div>
+		<div id="emotions" class="emotions ms-3"></div>
+		
+		<div class="fw-bold mt-3">topics</div>
+		<div id="topics"></div>
+		<div class="fw-bold mt-3">memories</div>
+		<div id="memories"></div>
+	</div>
+
+
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+	<script src='https://code.jquery.com/jquery-3.6.0.js'></script>
+	<script src='js/UI.js'></script>
+	<script src='js/People.js'></script>
+	<script src='js/Config.js '></script> 
+	<script src='js/Game.js'></script>
+	
+
+	<!--
+	<script src='js/ '></script> 
+	-->
+
+
+	<script src='js/events.js'></script>
+	<script src='js/js.js'></script>
+</body>
+</html>
