@@ -7,10 +7,10 @@ TODO
     x Tolerance
     x Resistance    
     x Emotions
-    x Topics
-    Perform
+    x Topics    
     x every time resistance pops, reset topics and emotions.
-    dont show house if they shut the door on them (if tolerance is low)
+    x dont show house if they shut the door on them (if tolerance is low)
+    Perform
 
 QUESTIONS
     Is what I wrote going to be enough? No.

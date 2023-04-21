@@ -62,8 +62,8 @@ class People{
     }
 
     pop(){
-        for (i of this.topics){
-            this.topics[i] = false;
+        for (let i in Config.topics){
+            this.topicFeelings[i] = false;
         }
         this.resetEmotion();
         this.greet();

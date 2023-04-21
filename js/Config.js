@@ -15,7 +15,7 @@ class Config {
     };
     time = 0;
     timeToReact = 3;
-    static topics = ['Christianity', 'Jesus', 'them', 'yourself'];
+    static topics = ['Christianity', 'Jesus', 'them', 'yourself', 'neighbors'];
     constructor(){
         for (let i = 0; i < this.numOfPeople; i++){
             let emotion = Config.emotions[randNum(0, Config.emotions.length - 1)];            

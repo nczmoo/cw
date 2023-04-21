@@ -31,6 +31,7 @@ class Game{
 	knock(){
 		this.config.people[this.house].knocked = true;
 		let rand = randNum(1, 3);
+		this.config.time += .1;
 		if (rand == 1){
 			this.config.people[this.house].answered = true;
 			this.config.people[this.house].createMemory("Day #" + this.config.day + ": You meet them for the first time!");
@@ -44,10 +45,12 @@ class Game{
 
 	next(){
 		this.house++;
+		this.config.time += .1;
 	}
 
 	prev(){		
 		this.house--;
+		this.config.time += .1;
 	}
 
 	talk(topic){		
@@ -56,6 +59,7 @@ class Game{
 		if (person.topicReacted[id]){
 			return;
 		}
+		this.config.time += .2;
 		person.talk(topic);
 		let delta = person.topicFeelings[id];
 		let reactionCaption = " they have no opinion about it.";
@@ -66,5 +70,12 @@ class Game{
 		}
 		person.createMemory("You bring up the subject of <span class='fw-bold'>" + topic + "</span> and " + reactionCaption);
 		person.react(delta);
+		if (randNum(1,2)){
+			let houseID = this.house + randNum(1,3);
+			let gossip =  "House #" + houseID + " enjoys talking about <span class='fw-bold'>" 
+				+ this.config.people[houseID].loves[randNum(0, this.config.people[houseID].loves - 1)] + "</span>"
+			person.createMemory('They let you know that ' + gossip);
+			this.config.people[houseID].createMemory("House #" + this.house + " told you that " + gossip);
+		}
 	}
 }

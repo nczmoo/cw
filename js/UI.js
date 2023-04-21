@@ -5,17 +5,19 @@ class UI{
 	}
 	refresh(){
 		$("#houseNum").html(this.formatID(game.house))
-		$("#time").html(game.config.time);
+		$("#time").html(this.formatTime(game.config.time));
 		$("#day").html(game.config.day);
-		$(".window").addClass('d-none');
-
-		//check if house is done talking with them
-		
-		if (game.config.people[game.house].answered){
+		$(".window").addClass('d-none');		
+		if (game.config.people[game.house].answered 
+			&& game.config.people[game.house].tolerance > 0){
 			this.printHouse();
 			return;
 		}		
 		this.printDoor();
+	}
+
+	formatTime(time){
+		return game.config.time.toFixed(1);
 	}
 
 	looping(){
@@ -35,7 +37,7 @@ class UI{
 	printDoor(){
 		$("#door").removeClass('d-none');		
 		$("#knock").prop('disabled', false);
-		if (game.config.people[game.house].knocked){
+		if (game.config.people[game.house].knocked || game.config.people[game.house].tolerance < 1){
 			$("#knock").prop('disabled', true);
 		}
 	}
