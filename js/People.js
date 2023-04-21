@@ -1,11 +1,12 @@
 class People{
     
     answered = false;
-    defaultTolerance = randNum(10, 100);
-    defaultResistance = randNum(1, 15);    
+    defaultTolerance = randNum(1, 100);
+    defaultResistance = randNum(1, Config.topics.length);    
     greetedWith = null;
     greetedAt = null;    
     knocked = false;
+    loves = [];
     memories = [];
     reactReturned = false;
     resistance = null
@@ -22,17 +23,19 @@ class People{
         this.resetTolerance();
         
         let assigned = [];        
+        let posTopics = []
         for (let i = 0; i < Config.topics.length; i ++){
             this.topicReacted.push(false);
         }
         while (1){
             assigned = [];
-            
+            posTopics = [];
             let pos = false, neg = false;
             for (let topic of Config.topics){
                 
                 let rand = randNum(-2, 2);
                 if (!pos && rand > 0){
+                    posTopics.push(topic);
                     pos = true;
                 } 
                 if (!neg && rand < 0){
@@ -44,6 +47,7 @@ class People{
                 break;
             }
         }
+        this.loves = posTopics;
         this.topicFeelings = assigned;
     }
     createMemory(txt){
@@ -52,21 +56,26 @@ class People{
 
     
 
-    greet(){        
+    greet(day){        
+        let caption = " Another day of spreading The Word!";
+        if (!this.answered){
+            this.answered = true;
+		    caption = " You meet them for the first time!";
+        }
+        if (day == null){
+            caption = " They are more interested in the conversation.";
+        }
+        day = game.config.day;
+        this.createMemory("Day #" + day + ": " + caption);
         this.createMemory("They greet you with " + this.greetedWith);        
         this.greetedAt = Date.now();
-    }
-
-    nextDay(){
-        this.reactReturned = false;
+        ui.refreshTimer();
     }
 
     pop(){
-        for (let i in Config.topics){
-            this.topicFeelings[i] = false;
-        }
+        this.resetTopics();
         this.resetEmotion();
-        this.greet();
+        this.greet(null);
     }
 
     react(delta){
@@ -122,6 +131,14 @@ class People{
 		this.createMemory("Trust: " + this.trust + "(<span class='text-success'>+" + delta + "</span>)");
     }
 
+    reset(){
+        this.reactReturned = false;
+        this.knocked = false;
+        this.resetEmotion();
+        this.resetResistance();
+        this.resetTolerance();
+    }
+
     resetEmotion(){
         let rand = Config.emotions[randNum(0, Config.emotions.length - 1)];
         this.greetedWith = rand;
@@ -136,7 +153,9 @@ class People{
     }
 
     resetTopics(){
-
+        for (let i in Config.topics){
+            this.topicFeelings[i] = false;
+        }
     }
 
     resetGreet(){

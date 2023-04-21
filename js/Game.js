@@ -3,7 +3,44 @@ class Game{
 	
 	house = null;
 	constructor(){
-		this.house = randNum(0, this.config.people.length - 1);
+		this.house = 0;//randNum(0, this.config.people.length - 1);
+	}
+	go(houseID){
+		let distance = Math.abs(this.house - houseID) * .1;		
+		this.config.changeTime(distance);
+		this.house = houseID;
+		ui.window = 'doors';
+
+	}
+
+	houses(){		
+		ui.window = 'houses';
+	}
+
+	knock(){
+		if (this.config.people[this.house].knocked){
+			return;
+		}
+		this.config.people[this.house].knocked = true;
+		let rand = randNum(1, 3);
+		this.config.time += .1;
+		if (rand == 1 || this.answered){			
+			this.config.people[this.house].greet(this.config.day);
+			return;
+		} 
+		ui.status("No one was home (#" + ui.formatID(this.house) + ") so you head next door.");	
+		this.next();
+		
+	}
+
+	next(){
+		this.house++;		
+		this.config.changeTime(.1);
+	}
+
+	prev(){		
+		this.house--;
+		this.config.changeTime(.1);		
 	}
 
 	react(emotion){
@@ -28,31 +65,6 @@ class Game{
 		person.react(delta);
 	}
 
-	knock(){
-		this.config.people[this.house].knocked = true;
-		let rand = randNum(1, 3);
-		this.config.time += .1;
-		if (rand == 1){
-			this.config.people[this.house].answered = true;
-			this.config.people[this.house].createMemory("Day #" + this.config.day + ": You meet them for the first time!");
-			this.config.people[this.house].greet();
-			return;
-		} 
-		ui.status("No one was home (#" + ui.formatID(this.house) + ") so you head next door.");	
-		this.next();
-		
-	}
-
-	next(){
-		this.house++;
-		this.config.time += .1;
-	}
-
-	prev(){		
-		this.house--;
-		this.config.time += .1;
-	}
-
 	talk(topic){		
 		let id = Config.topics.indexOf(topic);
 		let person = this.config.people[this.house];
@@ -70,12 +82,14 @@ class Game{
 		}
 		person.createMemory("You bring up the subject of <span class='fw-bold'>" + topic + "</span> and " + reactionCaption);
 		person.react(delta);
-		if (randNum(1,2)){
-			let houseID = this.house + randNum(1,3);
-			let gossip =  "House #" + houseID + " enjoys talking about <span class='fw-bold'>" 
-				+ this.config.people[houseID].loves[randNum(0, this.config.people[houseID].loves - 1)] + "</span>"
+		if (topic == 'neighbors' && randNum(1,2) == 1){
+			let rand = randNum(1, 3);
+			let houseID = this.house + rand;
+			console.log(houseID, rand);
+			let gossip =  "House #" + ui.formatID(houseID) + " enjoys talking about <span class='fw-bold'>" 
+				+ this.config.people[houseID].loves[randNum(0, this.config.people[houseID].loves.length - 1)] + "</span>"
 			person.createMemory('They let you know that ' + gossip);
-			this.config.people[houseID].createMemory("House #" + this.house + " told you that " + gossip);
+			this.config.people[houseID].createMemory("House #" + ui.formatID(this.house) + " told you that " + gossip);
 		}
 	}
 }

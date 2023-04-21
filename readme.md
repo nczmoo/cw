@@ -10,10 +10,11 @@ TODO
     x Topics    
     x every time resistance pops, reset topics and emotions.
     x dont show house if they shut the door on them (if tolerance is low)
-    Perform
+    house list
+    love list on person
+    
 
 QUESTIONS
-    Is what I wrote going to be enough? No.
 
 DESIGN
     Your goal is to gain trust to convince people to attend your sermon.     
@@ -40,3 +41,4 @@ DESIGN
 MAYBE
     Reputation - modifier
     when they pop resistance, have 1 in <resistance value> chance to lower resistance (no lower than 1)
+    Perform 
